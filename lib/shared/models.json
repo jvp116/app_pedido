@@ -1,0 +1,20 @@
+{
+	"id": 1,
+	"data": "",
+	"customer": {
+		"id": 1,
+		"cpf": "1234567890",
+		"name": "John",
+		"lastname": "VP"
+	},
+	"items": [
+		{
+			"id": 1,
+			"quantity": 2,
+			"product": {
+				"id": 1,
+				"description": "caneta"
+			}
+		}
+	]
+}
