@@ -7,6 +7,10 @@ class CustomerController extends ChangeNotifier {
   late CustomerStore? store;
   var state;
 
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
+
   initialize(CustomerStore newStore) {
     store = newStore;
     state = store!.value;
@@ -22,7 +26,19 @@ class CustomerController extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteCustomer(CustomerModel customer) async {
+  Future<void> editCustomer(int id, String name, String lastname) async {
+    if (store == null) {
+      throw 'Não foi possível editar o cliente!';
+    }
+
+    CustomerModel customer = await store!.service.editCustomer(id, name, lastname);
+    state.customers.insert(recoverIndex(id), customer);
+    state.customers.removeAt(recoverIndex(id) + 1);
+
+    notifyListeners();
+  }
+
+  Future<void> deleteCustomer(CustomerModel customer) async {
     bool isDeleted = await store!.service.deleteCustomer(customer.id);
     if (isDeleted) {
       state.customers.remove(customer);
@@ -38,5 +54,24 @@ class CustomerController extends ChangeNotifier {
       return 'CPF inválido';
     }
     return null;
+  }
+
+  initFormEdit(String name, String lastname) {
+    nameController.text = name;
+    lastnameController.text = lastname;
+  }
+
+  clearForm() {
+    nameController.clear();
+    lastnameController.clear();
+  }
+
+  int recoverIndex(int id) {
+    for (var obj in state.customers) {
+      if (obj.id == id) {
+        return state.customers.indexOf(obj);
+      }
+    }
+    return 0;
   }
 }

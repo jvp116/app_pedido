@@ -21,5 +21,8 @@ class ErrorCustomerState extends CustomerState {
 // create
 class SuccessCreateCustomerState extends CustomerState {}
 
+// edit
+class SuccessEditCustomerState extends CustomerState {}
+
 // delete
 class SuccessDeleteCustomerState extends CustomerState {}

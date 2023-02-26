@@ -1,4 +1,3 @@
-import 'package:app_pedido/features/customers/models/new_customer_model.dart';
 import 'package:app_pedido/features/customers/services/customer_service.dart';
 import 'package:app_pedido/features/customers/states/customer_state.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +22,16 @@ class CustomerStore extends ValueNotifier<CustomerState> {
     try {
       await service.createCustomer(cpf, name, lastname);
       value = SuccessCreateCustomerState();
+    } catch (e) {
+      value = ErrorCustomerState(e.toString());
+    }
+  }
+
+  Future editCustomer(int id, String name, String lastname) async {
+    value = LoadingCustomerState();
+    try {
+      await service.editCustomer(id, name, lastname);
+      value = SuccessEditCustomerState();
     } catch (e) {
       value = ErrorCustomerState(e.toString());
     }

@@ -87,22 +87,63 @@ class _ListCustomerState extends State<ListCustomer> {
               onSelected: (item) => {
                 if (item == 0)
                   {
+                    widget.controller.initFormEdit(customer.name, customer.lastname),
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         title: const Text('Editar Cliente'),
-                        content: const Row(
-                          children: [
-                            Text('Form edit'),
-                          ],
+                        content: SizedBox(
+                          width: double.infinity,
+                          height: 170,
+                          child: Form(
+                            key: widget.controller.formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                TextFormField(
+                                  controller: widget.controller.nameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Nome',
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Por favor, informe o nome';
+                                    }
+                                    return null;
+                                  },
+                                  maxLength: 30,
+                                ),
+                                TextFormField(
+                                  controller: widget.controller.lastnameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Sobrenome',
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Por favor, informe o sobrenome';
+                                    }
+                                    return null;
+                                  },
+                                  maxLength: 30,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         actions: <Widget>[
                           TextButton(
-                            onPressed: () => Navigator.pop(context, 'Cancelar'),
+                            onPressed: () {
+                              widget.controller.clearForm();
+                              Navigator.pop(context, 'Cancelar');
+                            },
                             child: const Text('Cancelar'),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.pop(context, 'Salvar'),
+                            onPressed: () {
+                              widget.controller.editCustomer(customer.id, widget.controller.nameController.text, widget.controller.lastnameController.text);
+                              widget.controller.clearForm();
+                              Navigator.pop(context, 'Salvar');
+                            },
                             child: const Text('Salvar'),
                           ),
                         ],

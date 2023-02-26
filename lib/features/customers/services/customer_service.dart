@@ -26,6 +26,17 @@ class CustomerService {
     return NewCustomerModel.fromMap(response.data);
   }
 
+  Future<CustomerModel> editCustomer(int id, String name, String lastname) async {
+    Map<String, dynamic> data = {
+      'nome': name,
+      'sobrenome': lastname,
+    };
+
+    final response = await dio.put('$basePath/clientes/$id', data: data);
+
+    return NewCustomerModel.fromMap(response.data);
+  }
+
   Future<bool> deleteCustomer(int id) async {
     var response = await dio.delete('$basePath/clientes/$id');
     if (response.statusCode == 204) {
