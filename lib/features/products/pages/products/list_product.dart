@@ -1,46 +1,42 @@
-import 'package:app_pedido/features/customers/pages/customers/controller/customer_controller.dart';
-import 'package:brasil_fields/brasil_fields.dart';
+import 'package:app_pedido/features/products/pages/products/controller/product_controller.dart';
 import 'package:flutter/material.dart';
 
-class ListCustomer extends StatefulWidget {
-  final CustomerController controller;
+class ListProduct extends StatefulWidget {
+  final ProductController controller;
 
-  const ListCustomer({super.key, required this.controller});
+  const ListProduct({super.key, required this.controller});
 
   @override
-  State<ListCustomer> createState() => _ListCustomerState();
+  State<ListProduct> createState() => _ListProductState();
 }
 
-class _ListCustomerState extends State<ListCustomer> {
+class _ListProductState extends State<ListProduct> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: widget.controller.state.customers.length,
+        itemCount: widget.controller.state.products.length,
         itemBuilder: (context, index) {
-          final customer = widget.controller.state.customers[index];
+          final product = widget.controller.state.products[index];
 
           return ListTile(
-            leading: Text('${customer.id}', style: const TextStyle(fontSize: 14)),
-            title: Text(customer.name),
-            subtitle: Text(customer.lastname),
+            leading: Text('${product.id}', style: const TextStyle(fontSize: 14)),
+            title: Text(product.description),
             onTap: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 160,
+                    height: 140,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("${customer.name} ${customer.lastname}", style: const TextStyle(fontSize: 24)),
-                          const SizedBox(height: 16),
-                          Text(UtilBrasilFields.obterCpf(customer.cpf), style: const TextStyle(fontSize: 16)),
+                          Text("${product.description}", style: const TextStyle(fontSize: 24)),
                           const SizedBox(height: 16),
                           ElevatedButton(
                             child: const Text('Fechar'),
@@ -87,50 +83,32 @@ class _ListCustomerState extends State<ListCustomer> {
               onSelected: (item) => {
                 if (item == 0)
                   {
-                    widget.controller.initFormEdit(customer.name, customer.lastname),
+                    widget.controller.initFormEdit(product.description),
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
-                        title: const Text('Editar Cliente'),
+                        title: const Text('Editar Produto'),
                         content: SizedBox(
                           width: double.infinity,
-                          height: 170,
+                          height: 100,
                           child: Form(
                             key: widget.controller.formKey,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 TextFormField(
-                                  controller: widget.controller.nameController,
+                                  controller: widget.controller.descriptionController,
                                   decoration: const InputDecoration(
-                                    labelText: 'Nome',
+                                    labelText: 'Descrição',
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Por favor, informe o nome';
+                                      return 'Por favor, informe a descrição';
                                     }
-                                    if (value == customer.name && widget.controller.isNameEdited == false && widget.controller.isLastnameEdited == false) {
-                                      return 'Informe um nome diferente';
+                                    if (value == product.description && widget.controller.isDescriptionEdited == false) {
+                                      return 'Informe uma descrição diferente';
                                     } else {
-                                      widget.controller.isNameEdited = true;
-                                    }
-                                    return null;
-                                  },
-                                  maxLength: 30,
-                                ),
-                                TextFormField(
-                                  controller: widget.controller.lastnameController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Sobrenome',
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Por favor, informe o sobrenome';
-                                    }
-                                    if (value == customer.lastname && widget.controller.isLastnameEdited == false && widget.controller.isNameEdited == false) {
-                                      return 'Informe um sobrenome diferente';
-                                    } else {
-                                      widget.controller.isLastnameEdited = true;
+                                      widget.controller.isDescriptionEdited = true;
                                     }
                                     return null;
                                   },
@@ -151,7 +129,7 @@ class _ListCustomerState extends State<ListCustomer> {
                           TextButton(
                             onPressed: () {
                               if (widget.controller.formKey.currentState!.validate()) {
-                                widget.controller.editCustomer(customer.id, widget.controller.nameController.text, widget.controller.lastnameController.text);
+                                widget.controller.editProduct(product.id, widget.controller.descriptionController.text);
                                 widget.controller.clearForm();
                                 Navigator.pop(context, 'Salvar');
                               }
@@ -167,7 +145,7 @@ class _ListCustomerState extends State<ListCustomer> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
-                        title: const Text('Excluir Cliente'),
+                        title: const Text('Excluir Produto'),
                         content: const Text('Tem certeza que deseja excluir esse produto?'),
                         actions: <Widget>[
                           TextButton(
@@ -176,7 +154,7 @@ class _ListCustomerState extends State<ListCustomer> {
                           ),
                           TextButton(
                             onPressed: () {
-                              widget.controller.deleteCustomer(customer);
+                              widget.controller.deleteProduct(product);
                               Navigator.pop(context);
                             },
                             child: const Text('Sim'),

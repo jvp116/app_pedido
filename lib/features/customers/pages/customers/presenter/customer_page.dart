@@ -30,27 +30,28 @@ class _CustomerPageState extends State<CustomerPage> {
   Widget build(BuildContext context) {
     controller.initialize(context.watch<CustomerStore>());
     return AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text("Clientes"),
-            ),
-            body: configPage(),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NewCustomerPage(controller: controller),
-                  ),
-                );
-              },
-              tooltip: 'Novo cliente',
-              child: const Icon(Icons.add_rounded),
-            ),
-          );
-        });
+      animation: controller,
+      builder: (context, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Clientes"),
+          ),
+          body: configPage(),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewCustomerPage(controller: controller),
+                ),
+              );
+            },
+            tooltip: 'Novo cliente',
+            child: const Icon(Icons.add_rounded),
+          ),
+        );
+      },
+    );
   }
 
   Widget configPage() {
