@@ -11,6 +11,9 @@ class CustomerController extends ChangeNotifier {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
 
+  late bool isNameEdited = false;
+  late bool isLastnameEdited = false;
+
   initialize(CustomerStore newStore) {
     store = newStore;
     state = store!.value;

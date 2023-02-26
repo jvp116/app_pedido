@@ -109,6 +109,11 @@ class _ListCustomerState extends State<ListCustomer> {
                                     if (value == null || value.isEmpty) {
                                       return 'Por favor, informe o nome';
                                     }
+                                    if (value == customer.name && widget.controller.isNameEdited == false && widget.controller.isLastnameEdited == false) {
+                                      return 'Informe um nome diferente';
+                                    } else {
+                                      widget.controller.isNameEdited = true;
+                                    }
                                     return null;
                                   },
                                   maxLength: 30,
@@ -121,6 +126,11 @@ class _ListCustomerState extends State<ListCustomer> {
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Por favor, informe o sobrenome';
+                                    }
+                                    if (value == customer.lastname && widget.controller.isLastnameEdited == false && widget.controller.isNameEdited == false) {
+                                      return 'Informe um sobrenome diferente';
+                                    } else {
+                                      widget.controller.isLastnameEdited = true;
                                     }
                                     return null;
                                   },
@@ -140,9 +150,11 @@ class _ListCustomerState extends State<ListCustomer> {
                           ),
                           TextButton(
                             onPressed: () {
-                              widget.controller.editCustomer(customer.id, widget.controller.nameController.text, widget.controller.lastnameController.text);
-                              widget.controller.clearForm();
-                              Navigator.pop(context, 'Salvar');
+                              if (widget.controller.formKey.currentState!.validate()) {
+                                widget.controller.editCustomer(customer.id, widget.controller.nameController.text, widget.controller.lastnameController.text);
+                                widget.controller.clearForm();
+                                Navigator.pop(context, 'Salvar');
+                              }
                             },
                             child: const Text('Salvar'),
                           ),
