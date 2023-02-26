@@ -17,6 +17,26 @@ class ProductStore extends ValueNotifier<ProductState> {
     }
   }
 
+  Future createProduct(String description) async {
+    value = LoadingProductState();
+    try {
+      await service.createProduct(description);
+      value = SuccessCreateProductState();
+    } catch (e) {
+      value = ErrorProductState(e.toString());
+    }
+  }
+
+  Future editProduct(int id, String description) async {
+    value = LoadingProductState();
+    try {
+      await service.editProduct(id, description);
+      value = SuccessEditProductState();
+    } catch (e) {
+      value = ErrorProductState(e.toString());
+    }
+  }
+
   Future deleteProduct(int id) async {
     value = LoadingProductState();
     try {

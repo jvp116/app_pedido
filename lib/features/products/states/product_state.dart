@@ -1,16 +1,14 @@
 import 'package:app_pedido/features/products/models/product_model.dart';
 
 abstract class ProductState {}
-// Initial, Success, Error, Loading
 
+// Initial, Success, Error, Loading
 class InitialProductState extends ProductState {}
 
 class SuccessProductState extends ProductState {
   final List<ProductModel> products;
   SuccessProductState(this.products);
 }
-
-class SuccessDeleteProductState extends ProductState {}
 
 class LoadingProductState extends ProductState {}
 
@@ -19,3 +17,12 @@ class ErrorProductState extends ProductState {
 
   ErrorProductState(this.message);
 }
+
+// create
+class SuccessCreateProductState extends ProductState {}
+
+// edit
+class SuccessEditProductState extends ProductState {}
+
+// delete
+class SuccessDeleteProductState extends ProductState {}
