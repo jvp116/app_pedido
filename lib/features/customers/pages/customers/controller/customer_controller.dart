@@ -47,12 +47,14 @@ class CustomerController extends ChangeNotifier {
   }
 
   String? validateCPF(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor, informe o CPF';
+    if (value == null || value.isEmpty) return 'Por favor, informe o CPF';
+
+    if (!UtilBrasilFields.isCPFValido(value)) return 'CPF inválido';
+
+    for (var customer in state.customers) {
+      if (UtilBrasilFields.removeCaracteres(value) == customer.cpf) return 'CPF já existente';
     }
-    if (!UtilBrasilFields.isCPFValido(value)) {
-      return 'CPF inválido';
-    }
+
     return null;
   }
 
