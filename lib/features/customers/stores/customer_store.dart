@@ -21,9 +21,9 @@ class CustomerStore extends ValueNotifier<CustomerState> {
     value = LoadingCustomerState();
     try {
       await service.createCustomer(cpf, name, lastname);
-      value = SuccessCreateCustomerState();
+      return true;
     } catch (e) {
-      value = ErrorCustomerState(e.toString());
+      return false;
     }
   }
 
@@ -31,9 +31,9 @@ class CustomerStore extends ValueNotifier<CustomerState> {
     value = LoadingCustomerState();
     try {
       await service.editCustomer(id, name, lastname);
-      value = SuccessEditCustomerState();
+      return true;
     } catch (e) {
-      value = ErrorCustomerState(e.toString());
+      return false;
     }
   }
 
@@ -41,9 +41,9 @@ class CustomerStore extends ValueNotifier<CustomerState> {
     value = LoadingCustomerState();
     try {
       await service.deleteCustomer(id);
-      value = SuccessDeleteCustomerState();
+      return true;
     } catch (e) {
-      value = ErrorCustomerState(e.toString());
+      return false;
     }
   }
 }

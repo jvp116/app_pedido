@@ -17,12 +17,3 @@ class ErrorCustomerState extends CustomerState {
 
   ErrorCustomerState(this.message);
 }
-
-// create
-class SuccessCreateCustomerState extends CustomerState {}
-
-// edit
-class SuccessEditCustomerState extends CustomerState {}
-
-// delete
-class SuccessDeleteCustomerState extends CustomerState {}
