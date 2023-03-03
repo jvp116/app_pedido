@@ -1,3 +1,4 @@
+import 'package:app_pedido/components/start_default_widget.dart';
 import 'package:app_pedido/features/customers/pages/customers/presenter/customer_page.dart';
 import 'package:app_pedido/features/customers/services/customer_service.dart';
 import 'package:app_pedido/features/customers/stores/customer_store.dart';
@@ -32,7 +33,7 @@ class _MyAppState extends State<App> {
           colorScheme: const ColorScheme.dark(),
           useMaterial3: true,
         ),
-        home: const MyHomePage(title: 'App'),
+        home: const MyHomePage(title: 'Pedidos'),
       ),
     );
   }
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.deepPurpleAccent,
               ),
               child: Text('App'),
             ),
@@ -104,17 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Por enquanto não existem pedidos. Faça um novo pedido!',
-              style: TextStyle(fontSize: 18),
-            ),
-          ],
-        ),
-      ),
+      body: const StartDefaultWidget(iconData: Icons.shopping_bag_outlined, title: 'Seja bem-vindo a área de pedidos!', subtitle: 'comece cadastrando seu primeiro pedido...'),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         tooltip: 'Novo pedido',

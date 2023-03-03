@@ -1,3 +1,4 @@
+import 'package:app_pedido/features/customers/models/customer_model.dart';
 import 'package:app_pedido/features/customers/services/customer_service.dart';
 import 'package:app_pedido/features/customers/states/customer_state.dart';
 import 'package:flutter/material.dart';
@@ -18,32 +19,27 @@ class CustomerStore extends ValueNotifier<CustomerState> {
   }
 
   Future createCustomer(String cpf, String name, String lastname) async {
-    value = LoadingCustomerState();
     try {
-      await service.createCustomer(cpf, name, lastname);
-      return true;
+      return await service.createCustomer(cpf, name, lastname);
     } catch (e) {
-      return false;
+      rethrow;
     }
   }
 
-  Future editCustomer(int id, String name, String lastname) async {
-    value = LoadingCustomerState();
+  Future<CustomerModel> editCustomer(int id, String name, String lastname) async {
     try {
-      await service.editCustomer(id, name, lastname);
-      return true;
+      CustomerModel customer = await service.editCustomer(id, name, lastname);
+      return customer;
     } catch (e) {
-      return false;
+      rethrow;
     }
   }
 
   Future deleteCustomer(int id) async {
-    value = LoadingCustomerState();
     try {
-      await service.deleteCustomer(id);
-      return true;
+      return await service.deleteCustomer(id);
     } catch (e) {
-      return false;
+      rethrow;
     }
   }
 }

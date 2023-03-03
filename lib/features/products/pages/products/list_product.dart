@@ -50,7 +50,7 @@ class _ListProductState extends State<ListProduct> {
               );
             },
             trailing: PopupMenuButton(
-              color: Colors.purple,
+              color: Colors.deepPurpleAccent,
               icon: const Icon(Icons.more_vert_rounded),
               itemBuilder: (context) => [
                 const PopupMenuItem<int>(
