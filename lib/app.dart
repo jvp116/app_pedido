@@ -1,10 +1,10 @@
-import 'package:app_pedido/components/start_default_widget.dart';
 import 'package:app_pedido/features/customers/pages/customers/presenter/customer_page.dart';
 import 'package:app_pedido/features/customers/services/customer_service.dart';
 import 'package:app_pedido/features/customers/stores/customer_store.dart';
 import 'package:app_pedido/features/products/pages/products/presenter/product_page.dart';
 import 'package:app_pedido/features/products/services/product_service.dart';
 import 'package:app_pedido/features/products/stores/product_store.dart';
+import 'package:app_pedido/shared/components/start_default_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
