@@ -15,7 +15,8 @@ class CustomerController extends ChangeNotifier {
   late bool isLastnameEdited = false;
 
   late bool isDeleted = false;
-  late SnackBar snackBarWidget = SnackBar(content: Text(isSuccessMsg()), backgroundColor: isSuccessColor());
+  late bool isEdited = false;
+  late SnackBar snackBarWidget = isSuccess();
 
   initialize(CustomerStore newStore) {
     store = newStore;
@@ -37,9 +38,11 @@ class CustomerController extends ChangeNotifier {
       throw 'Não foi possível editar o cliente!';
     }
     CustomerModel customer = await store!.editCustomer(id, name, lastname);
-    state.customers.insert(recoverIndex(id), customer);
-    state.customers.removeAt(recoverIndex(id) + 1);
-
+    if (customer.name.isNotEmpty && customer.lastname.isNotEmpty) {
+      isEdited = true;
+      state.customers.insert(recoverIndex(id), customer);
+      state.customers.removeAt(recoverIndex(id) + 1);
+    }
     notifyListeners();
   }
 
@@ -47,7 +50,6 @@ class CustomerController extends ChangeNotifier {
     isDeleted = await store!.deleteCustomer(customer.id);
     if (isDeleted) {
       state.customers.remove(customer);
-      SnackBar(content: Text(isSuccessMsg()), backgroundColor: isSuccessColor());
     }
     notifyListeners();
   }
@@ -83,19 +85,23 @@ class CustomerController extends ChangeNotifier {
     return 0;
   }
 
-  isSuccessMsg() {
-    if (isDeleted) {
-      return "Cliente excluído com sucesso!";
-    } else {
-      return "Ops! Algo deu errado.";
-    }
-  }
+  isSuccess() {
+    String msg = '';
+    Color color = const Color.fromARGB(167, 76, 175, 80);
 
-  isSuccessColor() {
     if (isDeleted) {
-      return const Color.fromARGB(167, 76, 175, 80);
+      msg = "Cliente excluído com sucesso!";
+    } else if (isEdited) {
+      msg = "Cliente editado com sucesso!";
     } else {
-      return const Color.fromARGB(163, 244, 67, 80);
+      msg = "Ops! Algo deu errado.";
+      color = const Color.fromARGB(163, 244, 67, 80);
     }
+
+    return SnackBar(
+      content: Text(msg),
+      backgroundColor: color,
+      duration: const Duration(seconds: 2),
+    );
   }
 }

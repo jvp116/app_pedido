@@ -151,7 +151,9 @@ class _ListCustomerState extends State<ListCustomer> {
                           TextButton(
                             onPressed: () {
                               if (widget.controller.formKey.currentState!.validate()) {
-                                widget.controller.editCustomer(customer.id, widget.controller.nameController.text, widget.controller.lastnameController.text);
+                                widget.controller.editCustomer(customer.id, widget.controller.nameController.text, widget.controller.lastnameController.text).then((value) {
+                                  ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                                });
                                 widget.controller.clearForm();
                                 Navigator.pop(context, 'Salvar');
                               }
