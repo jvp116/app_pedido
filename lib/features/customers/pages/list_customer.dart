@@ -54,7 +54,7 @@ class _ListCustomerState extends State<ListCustomer> {
               );
             },
             trailing: PopupMenuButton(
-              color: Colors.purple,
+              color: Colors.deepPurpleAccent,
               icon: const Icon(Icons.more_vert_rounded),
               itemBuilder: (context) => [
                 const PopupMenuItem<int>(
@@ -176,7 +176,9 @@ class _ListCustomerState extends State<ListCustomer> {
                           ),
                           TextButton(
                             onPressed: () {
-                              widget.controller.deleteCustomer(customer);
+                              widget.controller.deleteCustomer(customer).then((value) {
+                                ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                              });
                               Navigator.pop(context);
                             },
                             child: const Text('Sim'),

@@ -14,6 +14,9 @@ class CustomerController extends ChangeNotifier {
   late bool isNameEdited = false;
   late bool isLastnameEdited = false;
 
+  late bool isDeleted = false;
+  late SnackBar snackBarWidget = SnackBar(content: Text(isSuccessMsg()), backgroundColor: isSuccessColor());
+
   initialize(CustomerStore newStore) {
     store = newStore;
     state = store!.value;
@@ -24,7 +27,7 @@ class CustomerController extends ChangeNotifier {
     if (store == null) {
       throw 'Não foi possível cadastrar o cliente!';
     }
-    CustomerModel customer = await store!.service.createCustomer(cpf, name, lastname);
+    CustomerModel customer = await store!.createCustomer(cpf, name, lastname);
     state.customers.add(customer);
     notifyListeners();
   }
@@ -33,8 +36,7 @@ class CustomerController extends ChangeNotifier {
     if (store == null) {
       throw 'Não foi possível editar o cliente!';
     }
-
-    CustomerModel customer = await store!.service.editCustomer(id, name, lastname);
+    CustomerModel customer = await store!.editCustomer(id, name, lastname);
     state.customers.insert(recoverIndex(id), customer);
     state.customers.removeAt(recoverIndex(id) + 1);
 
@@ -42,9 +44,10 @@ class CustomerController extends ChangeNotifier {
   }
 
   Future<void> deleteCustomer(CustomerModel customer) async {
-    bool isDeleted = await store!.service.deleteCustomer(customer.id);
+    isDeleted = await store!.deleteCustomer(customer.id);
     if (isDeleted) {
       state.customers.remove(customer);
+      SnackBar(content: Text(isSuccessMsg()), backgroundColor: isSuccessColor());
     }
     notifyListeners();
   }
@@ -78,5 +81,21 @@ class CustomerController extends ChangeNotifier {
       }
     }
     return 0;
+  }
+
+  isSuccessMsg() {
+    if (isDeleted) {
+      return "Cliente excluído com sucesso!";
+    } else {
+      return "Ops! Algo deu errado.";
+    }
+  }
+
+  isSuccessColor() {
+    if (isDeleted) {
+      return const Color.fromARGB(167, 76, 175, 80);
+    } else {
+      return const Color.fromARGB(163, 244, 67, 80);
+    }
   }
 }
