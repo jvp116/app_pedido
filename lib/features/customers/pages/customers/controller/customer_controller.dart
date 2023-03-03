@@ -14,8 +14,9 @@ class CustomerController extends ChangeNotifier {
   late bool isNameEdited = false;
   late bool isLastnameEdited = false;
 
-  late bool isDeleted = false;
+  late bool isCreated = false;
   late bool isEdited = false;
+  late bool isDeleted = false;
   late SnackBar snackBarWidget = isSuccess();
 
   initialize(CustomerStore newStore) {
@@ -25,18 +26,15 @@ class CustomerController extends ChangeNotifier {
   }
 
   Future<void> createCustomer(String cpf, String name, String lastname) async {
-    if (store == null) {
-      throw 'Não foi possível cadastrar o cliente!';
-    }
     CustomerModel customer = await store!.createCustomer(cpf, name, lastname);
-    state.customers.add(customer);
+    if (customer.cpf.isNotEmpty) {
+      isCreated = true;
+      state.customers.add(customer);
+    }
     notifyListeners();
   }
 
   Future<void> editCustomer(int id, String name, String lastname) async {
-    if (store == null) {
-      throw 'Não foi possível editar o cliente!';
-    }
     CustomerModel customer = await store!.editCustomer(id, name, lastname);
     if (customer.name.isNotEmpty && customer.lastname.isNotEmpty) {
       isEdited = true;
@@ -88,11 +86,16 @@ class CustomerController extends ChangeNotifier {
   isSuccess() {
     String msg = '';
     Color color = const Color.fromARGB(167, 76, 175, 80);
+    if (store == null) {
+      throw 'Erro ao realizar ação!';
+    }
 
-    if (isDeleted) {
-      msg = "Cliente excluído com sucesso!";
+    if (isCreated) {
+      msg = "Cliente cadastrado com sucesso!";
     } else if (isEdited) {
       msg = "Cliente editado com sucesso!";
+    } else if (isDeleted) {
+      msg = "Cliente excluído com sucesso!";
     } else {
       msg = "Ops! Algo deu errado.";
       color = const Color.fromARGB(163, 244, 67, 80);

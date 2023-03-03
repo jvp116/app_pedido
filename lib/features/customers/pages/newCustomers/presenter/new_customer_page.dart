@@ -79,7 +79,9 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (controllerPage.formKey.currentState!.validate()) {
-                        controllerPage.createCustomer();
+                        controllerPage.createCustomer().then((value) {
+                          ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                        });
                         Navigator.pop(context);
                       }
                     },
