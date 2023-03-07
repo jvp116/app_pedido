@@ -129,7 +129,9 @@ class _ListProductState extends State<ListProduct> {
                           TextButton(
                             onPressed: () {
                               if (widget.controller.formKey.currentState!.validate()) {
-                                widget.controller.editProduct(product.id, widget.controller.descriptionController.text);
+                                widget.controller.editProduct(product.id, widget.controller.descriptionController.text).then((value) {
+                                  ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                                });
                                 widget.controller.clearForm();
                                 Navigator.pop(context, 'Salvar');
                               }
@@ -154,7 +156,9 @@ class _ListProductState extends State<ListProduct> {
                           ),
                           TextButton(
                             onPressed: () {
-                              widget.controller.deleteProduct(product);
+                              widget.controller.deleteProduct(product).then((value) {
+                                ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                              });
                               Navigator.pop(context);
                             },
                             child: const Text('Sim'),

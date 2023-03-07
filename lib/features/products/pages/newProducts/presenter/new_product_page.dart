@@ -52,7 +52,9 @@ class _NewProductPageState extends State<NewProductPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (controllerPage.formKey.currentState!.validate()) {
-                        controllerPage.createProduct();
+                        controllerPage.createProduct().then((value) {
+                          ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                        });
                         Navigator.pop(context);
                       }
                     },
