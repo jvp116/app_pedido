@@ -1,3 +1,4 @@
+import 'package:app_pedido/features/products/models/product_model.dart';
 import 'package:app_pedido/features/products/services/product_service.dart';
 import 'package:app_pedido/features/products/states/product_state.dart';
 import 'package:flutter/material.dart';
@@ -18,32 +19,27 @@ class ProductStore extends ValueNotifier<ProductState> {
   }
 
   Future createProduct(String description) async {
-    value = LoadingProductState();
     try {
-      await service.createProduct(description);
-      value = SuccessCreateProductState();
+      return await service.createProduct(description);
     } catch (e) {
-      value = ErrorProductState(e.toString());
+      rethrow;
     }
   }
 
-  Future editProduct(int id, String description) async {
-    value = LoadingProductState();
+  Future<ProductModel> editProduct(int id, String description) async {
     try {
-      await service.editProduct(id, description);
-      value = SuccessEditProductState();
+      ProductModel customer = await service.editProduct(id, description);
+      return customer;
     } catch (e) {
-      value = ErrorProductState(e.toString());
+      rethrow;
     }
   }
 
   Future deleteProduct(int id) async {
-    value = LoadingProductState();
     try {
-      await service.deleteProduct(id);
-      value = SuccessDeleteProductState();
+      return await service.deleteProduct(id);
     } catch (e) {
-      value = ErrorProductState(e.toString());
+      rethrow;
     }
   }
 }
