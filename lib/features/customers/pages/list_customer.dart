@@ -170,7 +170,7 @@ class _ListCustomerState extends State<ListCustomer> {
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         title: const Text('Excluir Cliente'),
-                        content: const Text('Tem certeza que deseja excluir esse produto?'),
+                        content: const Text('Tem certeza que deseja excluir esse cliente?'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.pop(context, 'Não'),

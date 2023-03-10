@@ -1,10 +1,10 @@
-import 'package:app_pedido/features/products/pages/newProducts/presenter/new_product_page.dart';
 import 'package:app_pedido/features/products/pages/products/controller/product_controller.dart';
 import 'package:app_pedido/features/products/pages/products/list_product.dart';
 import 'package:app_pedido/features/products/states/product_state.dart';
 import 'package:app_pedido/features/products/stores/product_store.dart';
 import 'package:app_pedido/shared/components/loading_widget.dart';
 import 'package:app_pedido/shared/components/start_default_widget.dart';
+import 'package:app_pedido/shared/utils/navigate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,12 +39,7 @@ class _ProductPageState extends State<ProductPage> {
           body: configPage(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NewProductPage(controller: controller),
-                ),
-              );
+              Navigate().toNewProductPage(context, controller);
             },
             tooltip: 'Novo produto',
             child: const Icon(Icons.add_rounded),

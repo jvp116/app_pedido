@@ -2,8 +2,10 @@ import 'package:app_pedido/features/order/pages/list_order.dart';
 import 'package:app_pedido/features/order/pages/orders/controller/order_controller.dart';
 import 'package:app_pedido/features/order/states/order_state.dart';
 import 'package:app_pedido/features/order/stores/order_store.dart';
+import 'package:app_pedido/shared/components/drawer_widget.dart';
 import 'package:app_pedido/shared/components/loading_widget.dart';
 import 'package:app_pedido/shared/components/start_default_widget.dart';
+import 'package:app_pedido/shared/utils/navigate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,15 +34,14 @@ class _OrderPageState extends State<OrderPage> {
       animation: controller,
       builder: (context, child) {
         return Scaffold(
+          appBar: AppBar(
+            title: const Text("Pedidos"),
+          ),
+          drawer: const DrawerWidget(),
           body: configPage(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => NewOrderPage(controller: controller),
-              //   ),
-              // );
+              Navigate().toNewOrderPage(context, controller);
             },
             tooltip: 'Novo pedido',
             child: const Icon(Icons.add_rounded),
