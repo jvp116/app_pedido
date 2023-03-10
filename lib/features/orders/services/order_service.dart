@@ -1,6 +1,6 @@
 import 'package:app_pedido/features/customers/models/customer_model.dart';
-import 'package:app_pedido/features/order/models/item_model.dart';
-import 'package:app_pedido/features/order/models/order_model.dart';
+import 'package:app_pedido/features/orders/models/item_model.dart';
+import 'package:app_pedido/features/orders/models/order_model.dart';
 import 'package:app_pedido/shared/constants.dart';
 import 'package:dio/dio.dart';
 

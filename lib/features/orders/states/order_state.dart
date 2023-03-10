@@ -1,4 +1,4 @@
-import 'package:app_pedido/features/order/models/order_model.dart';
+import 'package:app_pedido/features/orders/models/order_model.dart';
 
 abstract class OrderState {}
 

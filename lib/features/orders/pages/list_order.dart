@@ -1,4 +1,4 @@
-import 'package:app_pedido/features/order/pages/orders/controller/order_controller.dart';
+import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 

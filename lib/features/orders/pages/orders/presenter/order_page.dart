@@ -1,7 +1,7 @@
-import 'package:app_pedido/features/order/pages/list_order.dart';
-import 'package:app_pedido/features/order/pages/orders/controller/order_controller.dart';
-import 'package:app_pedido/features/order/states/order_state.dart';
-import 'package:app_pedido/features/order/stores/order_store.dart';
+import 'package:app_pedido/features/orders/pages/list_order.dart';
+import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
+import 'package:app_pedido/features/orders/states/order_state.dart';
+import 'package:app_pedido/features/orders/stores/order_store.dart';
 import 'package:app_pedido/shared/components/drawer_widget.dart';
 import 'package:app_pedido/shared/components/loading_widget.dart';
 import 'package:app_pedido/shared/components/start_default_widget.dart';

@@ -1,7 +1,7 @@
 import 'package:app_pedido/features/customers/models/customer_model.dart';
-import 'package:app_pedido/features/order/models/item_model.dart';
-import 'package:app_pedido/features/order/services/order_service.dart';
-import 'package:app_pedido/features/order/states/order_state.dart';
+import 'package:app_pedido/features/orders/models/item_model.dart';
+import 'package:app_pedido/features/orders/services/order_service.dart';
+import 'package:app_pedido/features/orders/states/order_state.dart';
 import 'package:flutter/material.dart';
 
 class OrderStore extends ValueNotifier<OrderState> {
