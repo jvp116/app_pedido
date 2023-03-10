@@ -80,7 +80,7 @@ class _NewCustomerPageState extends State<NewCustomerPage> {
                     onPressed: () {
                       if (controllerPage.formKey.currentState!.validate()) {
                         controllerPage.createCustomer().then((value) {
-                          ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                          ScaffoldMessenger.of(context).showSnackBar(widget.controller.isSuccess());
                         });
                         Navigator.pop(context);
                       }

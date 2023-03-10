@@ -152,7 +152,7 @@ class _ListCustomerState extends State<ListCustomer> {
                             onPressed: () {
                               if (widget.controller.formKey.currentState!.validate()) {
                                 widget.controller.editCustomer(customer.id, widget.controller.nameController.text, widget.controller.lastnameController.text).then((value) {
-                                  ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                                  ScaffoldMessenger.of(context).showSnackBar(widget.controller.isSuccess());
                                 });
                                 widget.controller.clearForm();
                                 Navigator.pop(context, 'Salvar');
@@ -179,7 +179,7 @@ class _ListCustomerState extends State<ListCustomer> {
                           TextButton(
                             onPressed: () {
                               widget.controller.deleteCustomer(customer).then((value) {
-                                ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                                ScaffoldMessenger.of(context).showSnackBar(widget.controller.isSuccess());
                               });
                               Navigator.pop(context);
                             },

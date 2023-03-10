@@ -17,7 +17,6 @@ class CustomerController extends ChangeNotifier {
   late bool isCreated = false;
   late bool isEdited = false;
   late bool isDeleted = false;
-  late SnackBar snackBarWidget = isSuccess();
 
   initialize(CustomerStore newStore) {
     store = newStore;
@@ -100,11 +99,17 @@ class CustomerController extends ChangeNotifier {
       msg = "Ops! Algo deu errado.";
       color = const Color.fromARGB(163, 244, 67, 80);
     }
-
+    resetActions();
     return SnackBar(
       content: Text(msg),
       backgroundColor: color,
       duration: const Duration(seconds: 2),
     );
+  }
+
+  resetActions() {
+    isCreated = false;
+    isEdited = false;
+    isDeleted = false;
   }
 }

@@ -53,7 +53,7 @@ class _NewProductPageState extends State<NewProductPage> {
                     onPressed: () {
                       if (controllerPage.formKey.currentState!.validate()) {
                         controllerPage.createProduct().then((value) {
-                          ScaffoldMessenger.of(context).showSnackBar(widget.controller.snackBarWidget);
+                          ScaffoldMessenger.of(context).showSnackBar(widget.controller.isSuccess());
                         });
                         Navigator.pop(context);
                       }
