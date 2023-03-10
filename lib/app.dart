@@ -1,8 +1,8 @@
 import 'package:app_pedido/features/customers/services/customer_service.dart';
 import 'package:app_pedido/features/customers/stores/customer_store.dart';
-import 'package:app_pedido/features/order/pages/orders/presenter/order_page.dart';
-import 'package:app_pedido/features/order/services/order_service.dart';
-import 'package:app_pedido/features/order/stores/order_store.dart';
+import 'package:app_pedido/features/orders/pages/orders/presenter/order_page.dart';
+import 'package:app_pedido/features/orders/services/order_service.dart';
+import 'package:app_pedido/features/orders/stores/order_store.dart';
 import 'package:app_pedido/features/products/services/product_service.dart';
 import 'package:app_pedido/features/products/stores/product_store.dart';
 import 'package:dio/dio.dart';

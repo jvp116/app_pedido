@@ -1,7 +1,7 @@
 import 'package:app_pedido/features/customers/pages/customers/controller/customer_controller.dart';
 import 'package:app_pedido/features/customers/pages/customers/presenter/customer_page.dart';
 import 'package:app_pedido/features/customers/pages/newCustomers/presenter/new_customer_page.dart';
-import 'package:app_pedido/features/order/pages/orders/controller/order_controller.dart';
+import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
 import 'package:app_pedido/features/products/pages/newProducts/presenter/new_product_page.dart';
 import 'package:app_pedido/features/products/pages/products/controller/product_controller.dart';
 import 'package:app_pedido/features/products/pages/products/presenter/product_page.dart';
