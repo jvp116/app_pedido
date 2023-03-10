@@ -13,10 +13,10 @@ class App extends StatefulWidget {
   const App({super.key});
 
   @override
-  State<App> createState() => _MyAppState();
+  State<App> createState() => _AppState();
 }
 
-class _MyAppState extends State<App> {
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
