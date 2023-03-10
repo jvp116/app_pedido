@@ -1,4 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:app_pedido/features/customers/models/customer_model.dart';
+import 'package:app_pedido/features/customers/models/new_customer_model.dart';
 import 'package:app_pedido/features/orders/models/item_model.dart';
 
 class OrderModel {
@@ -13,16 +16,25 @@ class OrderModel {
     required this.items,
   });
 
-  static OrderModel fromMap(Map<String, dynamic> map) {
-    return OrderModel(id: map['id'] ?? 0, date: map['data'] ?? '', customer: map['cliente'] ?? '', items: map['itens'] ?? '');
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'date': date,
+      'customer': NewCustomerModel.toMap(customer),
+      'items': items.map((item) => ItemModel.toMap(item)).toList(),
+    };
   }
 
-  static Map<String, dynamic> toMap(OrderModel order) {
-    return {
-      'id': order.id,
-      'data': order.date,
-      'cliente': order.customer,
-      'itens': order.items
-    };
+  static OrderModel fromMap(Map<String, dynamic> map) {
+    return OrderModel(
+      id: map['id'] ?? 0,
+      date: map['data'] ?? '',
+      customer: NewCustomerModel.fromMap(map['cliente'] ?? []),
+      items: List<ItemModel>.from(
+        (map['itens'] ?? []).map<ItemModel>(
+          (item) => ItemModel.fromMap(item as Map<String, dynamic>),
+        ),
+      ),
+    );
   }
 }

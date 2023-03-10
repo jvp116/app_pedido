@@ -1,5 +1,4 @@
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 class ListOrder extends StatefulWidget {
@@ -40,7 +39,7 @@ class _ListOrderState extends State<ListOrder> {
                         children: [
                           Text("${order.customer.name} ${order.customer.lastname}", style: const TextStyle(fontSize: 24)),
                           const SizedBox(height: 16),
-                          Text(UtilBrasilFields.obterCpf(order.cpf), style: const TextStyle(fontSize: 16)),
+                          const Text('order.', style: TextStyle(fontSize: 16)),
                           const SizedBox(height: 16),
                           ElevatedButton(
                             child: const Text('Fechar'),
