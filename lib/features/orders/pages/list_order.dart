@@ -20,31 +20,64 @@ class _ListOrderState extends State<ListOrder> {
         itemCount: widget.controller.state.orders.length,
         itemBuilder: (context, index) {
           final order = widget.controller.state.orders[index];
+          final item = order.items[index];
+          final formatDate = order.date.split(' ');
 
           return ListTile(
             leading: Text('${order.id}', style: const TextStyle(fontSize: 14)),
-            title: Text(order.customer.name),
-            subtitle: Text(order.date),
+            title: Text("${order.customer.name} ${order.customer.lastname}"),
+            subtitle: Text(formatDate[0]),
             onTap: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 160,
+                    height: 450,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("${order.customer.name} ${order.customer.lastname}", style: const TextStyle(fontSize: 24)),
-                          const SizedBox(height: 16),
-                          const Text('order.', style: TextStyle(fontSize: 16)),
-                          const SizedBox(height: 16),
-                          ElevatedButton(
-                            child: const Text('Fechar'),
-                            onPressed: () => Navigator.pop(context),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text("Pedido ${order.id}", style: const TextStyle(fontSize: 24)),
+                              IconButton(
+                                icon: const Icon(Icons.close_rounded),
+                                color: Colors.deepPurple,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
                           ),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              const Icon(Icons.person_outline_rounded, color: Colors.deepPurple),
+                              Text(" ${order.customer.name} ${order.customer.lastname}", style: const TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              const Icon(Icons.date_range_rounded, color: Colors.deepPurple),
+                              Text(" ${formatDate[0]}", style: const TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              const Icon(Icons.access_time_rounded, color: Colors.deepPurple),
+                              Text(" ${formatDate[1]}", style: const TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          ListTile(
+                            title: Text("${item.quantity} ${item.product.description}", style: const TextStyle(fontSize: 16)),
+                          ),
+                          const SizedBox(height: 16),
                         ],
                       ),
                     ),
@@ -52,51 +85,33 @@ class _ListOrderState extends State<ListOrder> {
                 },
               );
             },
-            trailing: PopupMenuButton(
-              color: Colors.deepPurpleAccent,
-              icon: const Icon(Icons.more_vert_rounded),
-              itemBuilder: (context) => [
-                const PopupMenuItem<int>(
-                  value: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Excluir",
-                        style: TextStyle(color: Colors.white),
+            trailing: IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Excluir Cliente'),
+                    content: const Text('Tem certeza que deseja excluir esse pedido?'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'Não'),
+                        child: const Text('Não'),
                       ),
-                      Icon(Icons.delete_rounded)
+                      TextButton(
+                        onPressed: () {
+                          widget.controller.deleteOrder(order).then((value) {
+                            ScaffoldMessenger.of(context).showSnackBar(widget.controller.isSuccess());
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Sim'),
+                      ),
                     ],
                   ),
-                ),
-              ],
-              onSelected: (item) => {
-                if (item == 0)
-                  {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: const Text('Excluir Cliente'),
-                        content: const Text('Tem certeza que deseja excluir esse produto?'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'Não'),
-                            child: const Text('Não'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              widget.controller.deleteOrder(order).then((value) {
-                                ScaffoldMessenger.of(context).showSnackBar(widget.controller.isSuccess());
-                              });
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Sim'),
-                          ),
-                        ],
-                      ),
-                    )
-                  }
+                );
               },
+              icon: const Icon(Icons.delete_rounded),
+              color: Colors.deepPurpleAccent,
             ),
           );
         },
