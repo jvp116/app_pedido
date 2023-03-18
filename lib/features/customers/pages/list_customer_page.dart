@@ -2,16 +2,16 @@ import 'package:app_pedido/features/customers/pages/customers/controller/custome
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
-class ListCustomer extends StatefulWidget {
+class ListCustomerPage extends StatefulWidget {
   final CustomerController controller;
 
-  const ListCustomer({super.key, required this.controller});
+  const ListCustomerPage({super.key, required this.controller});
 
   @override
-  State<ListCustomer> createState() => _ListCustomerState();
+  State<ListCustomerPage> createState() => _ListCustomerPageState();
 }
 
-class _ListCustomerState extends State<ListCustomer> {
+class _ListCustomerPageState extends State<ListCustomerPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

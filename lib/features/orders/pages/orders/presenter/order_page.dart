@@ -1,4 +1,4 @@
-import 'package:app_pedido/features/orders/pages/listOrder/presenter/list_order.dart';
+import 'package:app_pedido/features/orders/pages/listOrders/presenter/list_order_page.dart';
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
 import 'package:app_pedido/features/orders/states/order_state.dart';
 import 'package:app_pedido/features/orders/stores/order_store.dart';
@@ -36,6 +36,9 @@ class _OrderPageState extends State<OrderPage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Pedidos"),
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded), color: Colors.deepPurpleAccent, iconSize: 32)
+            ],
           ),
           drawer: const DrawerWidget(),
           body: configPage(),
@@ -65,7 +68,7 @@ class _OrderPageState extends State<OrderPage> {
     }
 
     if (controller.state is SuccessOrderState && controller.state.orders.isNotEmpty) {
-      return ListOrder(controller: controller);
+      return ListOrderPage(controller: controller);
     }
 
     return const StartDefaultWidget(iconData: Icons.shopping_bag_outlined, title: 'Seja bem-vindo a área de pedidos!', subtitle: 'comece cadastrando seu primeiro pedido...');

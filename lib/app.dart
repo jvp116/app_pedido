@@ -31,6 +31,7 @@ class _AppState extends State<App> {
       ],
       child: MaterialApp(
         title: 'App',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: const ColorScheme.dark(),
           useMaterial3: true,

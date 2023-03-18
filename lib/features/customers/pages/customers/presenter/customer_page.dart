@@ -1,5 +1,5 @@
 import 'package:app_pedido/features/customers/pages/customers/controller/customer_controller.dart';
-import 'package:app_pedido/features/customers/pages/list_customer.dart';
+import 'package:app_pedido/features/customers/pages/list_customer_page.dart';
 import 'package:app_pedido/features/customers/states/customer_state.dart';
 import 'package:app_pedido/features/customers/stores/customer_store.dart';
 import 'package:app_pedido/shared/components/loading_widget.dart';
@@ -63,7 +63,7 @@ class _CustomerPageState extends State<CustomerPage> {
     }
 
     if (controller.state is SuccessCustomerState && controller.state.customers.isNotEmpty) {
-      return ListCustomer(controller: controller);
+      return ListCustomerPage(controller: controller);
     }
 
     return const StartDefaultWidget(iconData: Icons.sentiment_satisfied_alt_outlined, title: 'Seja bem-vindo a área de clientes!', subtitle: 'comece cadastrando seu primeiro cliente...');

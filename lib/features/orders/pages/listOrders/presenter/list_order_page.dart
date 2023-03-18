@@ -1,17 +1,17 @@
-import 'package:app_pedido/features/orders/pages/listOrder/controller/list_order_controller.dart';
+import 'package:app_pedido/features/orders/pages/listOrders/controller/list_order_controller.dart';
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
 import 'package:flutter/material.dart';
 
-class ListOrder extends StatefulWidget {
+class ListOrderPage extends StatefulWidget {
   final OrderController controller;
 
-  const ListOrder({super.key, required this.controller});
+  const ListOrderPage({super.key, required this.controller});
 
   @override
-  State<ListOrder> createState() => _ListOrderState();
+  State<ListOrderPage> createState() => _ListOrderPageState();
 }
 
-class _ListOrderState extends State<ListOrder> {
+class _ListOrderPageState extends State<ListOrderPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
