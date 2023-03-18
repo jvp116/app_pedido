@@ -1,3 +1,4 @@
+import 'package:app_pedido/features/orders/pages/listOrder/controller/list_order_controller.dart';
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,6 @@ class _ListOrderState extends State<ListOrder> {
         itemCount: widget.controller.state.orders.length,
         itemBuilder: (context, index) {
           final order = widget.controller.state.orders[index];
-          final item = order.items[index];
           final formatDate = order.date.split(' ');
 
           return ListTile(
@@ -32,7 +32,6 @@ class _ListOrderState extends State<ListOrder> {
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 450,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -40,18 +39,18 @@ class _ListOrderState extends State<ListOrder> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text("Pedido ${order.id}", style: const TextStyle(fontSize: 24)),
                               IconButton(
                                 icon: const Icon(Icons.close_rounded),
-                                color: Colors.deepPurple,
+                                color: Colors.deepPurpleAccent,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
                               ),
                             ],
                           ),
+                          Text("Pedido ${order.id}", style: const TextStyle(fontSize: 24)),
                           const SizedBox(height: 16),
                           Row(
                             children: [
@@ -74,8 +73,57 @@ class _ListOrderState extends State<ListOrder> {
                             ],
                           ),
                           const SizedBox(height: 16),
-                          ListTile(
-                            title: Text("${item.quantity} ${item.product.description}", style: const TextStyle(fontSize: 16)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text("Total de items: ${order.items.length}", style: const TextStyle(fontSize: 12)),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Table(
+                            border: TableBorder.all(borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)), color: Colors.deepPurple),
+                            columnWidths: const <int, TableColumnWidth>{
+                              0: FixedColumnWidth(128),
+                              1: FlexColumnWidth(),
+                            },
+                            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                            children: <TableRow>[
+                              TableRow(
+                                children: <Widget>[
+                                  Container(
+                                    alignment: Alignment.center,
+                                    height: 32,
+                                    child: const Text("Quantidade",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        )),
+                                  ),
+                                  TableCell(
+                                    verticalAlignment: TableCellVerticalAlignment.middle,
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height: 32,
+                                      width: 32,
+                                      child: const Text("Descrição", style: TextStyle(fontSize: 16)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Table(
+                                border: TableBorder.all(borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)), color: Colors.deepPurple),
+                                columnWidths: const <int, TableColumnWidth>{
+                                  0: FixedColumnWidth(128),
+                                  1: FlexColumnWidth(),
+                                },
+                                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                                children: ListOrderController().renderTableItems(order.items),
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 16),
                         ],
