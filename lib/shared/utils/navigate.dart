@@ -54,11 +54,11 @@ class Navigate {
     // );
   }
 
-  void toSearchOrderPage(BuildContext context) {
+  void toSearchOrderPage(BuildContext context, OrderController controller) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const SearchOrderPage(),
+        builder: (context) => SearchOrderPage(orderController: controller),
       ),
     );
   }

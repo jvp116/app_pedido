@@ -1,21 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
+import 'package:app_pedido/features/orders/pages/searchListOrders/presenter/search_list_order_page.dart';
+import 'package:app_pedido/features/orders/pages/searchOrders/controller/search_order_controller.dart';
 import 'package:flutter/material.dart';
 
-enum OrderFilter {
-  nome,
-  cpf
-}
-
 class SearchOrderPage extends StatefulWidget {
-  const SearchOrderPage({super.key});
+  final OrderController orderController;
+
+  const SearchOrderPage({super.key, required this.orderController});
 
   @override
   State<SearchOrderPage> createState() => _SearchOrderPageState();
 }
 
 class _SearchOrderPageState extends State<SearchOrderPage> {
-  bool searchByCpf = true;
-  bool searchByName = false;
-  final List<String> _filters = <String>[];
+  final SearchOrderController controller = SearchOrderController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,35 +43,41 @@ class _SearchOrderPageState extends State<SearchOrderPage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Wrap(
-              spacing: 16.0,
-              children: OrderFilter.values.map((OrderFilter orderFilter) {
-                return FilterChip(
-                  selectedColor: const Color.fromARGB(123, 104, 58, 183),
-                  label: Text(orderFilter.name),
-                  selected: _filters.contains(orderFilter.name),
-                  onSelected: (bool value) {
-                    setState(() {
-                      if (value) {
-                        if (!_filters.contains(orderFilter.name) && _filters.isEmpty) {
-                          _filters.add(orderFilter.name);
-                        }
-                      } else {
-                        _filters.removeWhere((String name) {
-                          return name == orderFilter.name;
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Wrap(
+                  spacing: 16.0,
+                  children: OrderFilter.values.map((OrderFilter orderFilter) {
+                    return FilterChip(
+                      selectedColor: Colors.deepPurple,
+                      label: Text(orderFilter.name),
+                      selected: controller.filters.contains(orderFilter.name),
+                      onSelected: (bool value) {
+                        setState(() {
+                          if (value) {
+                            if (!controller.filters.contains(orderFilter.name) && controller.filters.isEmpty) {
+                              controller.filters.add(orderFilter.name);
+                            }
+                          } else {
+                            controller.filters.removeWhere((String name) {
+                              return name == orderFilter.name;
+                            });
+                          }
                         });
-                      }
-                    });
-                  },
-                );
-              }).toList(),
-            ),
-          ],
-        ),
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
+          ),
+          SearchListOrderPage(controller: widget.orderController)
+        ],
       ),
     );
   }
