@@ -2,6 +2,7 @@ import 'package:app_pedido/features/customers/pages/customers/controller/custome
 import 'package:app_pedido/features/customers/pages/customers/presenter/customer_page.dart';
 import 'package:app_pedido/features/customers/pages/newCustomers/presenter/new_customer_page.dart';
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
+import 'package:app_pedido/features/orders/pages/searchOrders/presentation/search_order_page.dart';
 import 'package:app_pedido/features/products/pages/newProducts/presenter/new_product_page.dart';
 import 'package:app_pedido/features/products/pages/products/controller/product_controller.dart';
 import 'package:app_pedido/features/products/pages/products/presenter/product_page.dart';
@@ -51,5 +52,14 @@ class Navigate {
     //     builder: (context) => NewOrderPage(controller: controller),
     //   ),
     // );
+  }
+
+  void toSearchOrderPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SearchOrderPage(),
+      ),
+    );
   }
 }

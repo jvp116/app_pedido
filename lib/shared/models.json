@@ -3,9 +3,9 @@
 	"data": "",
 	"customer": {
 		"id": 1,
-		"cpf": "1234567890",
-		"name": "John",
-		"lastname": "VP"
+		"cpf": "12345678900",
+		"name": "Customer",
+		"lastname": "Rich"
 	},
 	"items": [
 		{

@@ -37,7 +37,13 @@ class _OrderPageState extends State<OrderPage> {
           appBar: AppBar(
             title: const Text("Pedidos"),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded), color: Colors.deepPurpleAccent, iconSize: 32)
+              IconButton(
+                  onPressed: () {
+                    Navigate().toSearchOrderPage(context);
+                  },
+                  icon: const Icon(Icons.search_rounded),
+                  color: Colors.deepPurpleAccent,
+                  iconSize: 32)
             ],
           ),
           drawer: const DrawerWidget(),
