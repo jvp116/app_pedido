@@ -1,5 +1,6 @@
 import 'package:app_pedido/features/orders/pages/listOrders/controller/list_order_controller.dart';
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 class ListOrderPage extends StatefulWidget {
@@ -39,8 +40,9 @@ class _ListOrderPageState extends State<ListOrderPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              Text("CPF: ${UtilBrasilFields.obterCpf(order.customer.cpf)}"),
                               IconButton(
                                 icon: const Icon(Icons.close_rounded),
                                 color: Colors.deepPurpleAccent,

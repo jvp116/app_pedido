@@ -1,12 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app_pedido/features/orders/models/order_model.dart';
+import 'package:flutter/material.dart';
 
 class SearchOrderController {
-  final bool searchByCpf = false;
-  final bool searchByName = false;
-  final List<String> filters = <String>[];
-}
+  final TextEditingController searchController = TextEditingController();
 
-enum OrderFilter {
-  nome,
-  cpf
+  filterByCpf(List<OrderModel> orders, String cpf) {
+    var ordersByCpf = List<OrderModel>.of(orders);
+    ordersByCpf.retainWhere((order) => order.customer.cpf.startsWith(cpf));
+
+    if (cpf.isEmpty || ordersByCpf.isEmpty) {
+      return orders;
+    }
+    cpf = "";
+    return ordersByCpf;
+  }
 }

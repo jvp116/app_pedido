@@ -1,12 +1,12 @@
-
+import 'package:app_pedido/features/orders/models/order_model.dart';
 import 'package:app_pedido/features/orders/pages/listOrders/controller/list_order_controller.dart';
-import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 class SearchListOrderPage extends StatefulWidget {
-  final OrderController controller;
+  final List<OrderModel> orders;
 
-  const SearchListOrderPage({super.key, required this.controller});
+  const SearchListOrderPage({super.key, required this.orders});
 
   @override
   State<SearchListOrderPage> createState() => _SearchListOrderPageState();
@@ -19,9 +19,9 @@ class _SearchListOrderPageState extends State<SearchListOrderPage> {
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: widget.controller.state.orders.length,
+        itemCount: widget.orders.length,
         itemBuilder: (context, index) {
-          final order = widget.controller.state.orders[index];
+          final order = widget.orders[index];
           final formatDate = order.date.split(' ');
 
           return ListTile(
@@ -40,8 +40,9 @@ class _SearchListOrderPageState extends State<SearchListOrderPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              Text("CPF: ${UtilBrasilFields.obterCpf(order.customer.cpf)}"),
                               IconButton(
                                 icon: const Icon(Icons.close_rounded),
                                 color: Colors.deepPurpleAccent,
