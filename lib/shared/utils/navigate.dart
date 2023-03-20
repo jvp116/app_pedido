@@ -50,7 +50,7 @@ class Navigate {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const NewOrderPage(),
+        builder: (context) => NewOrderPage(controller: controller),
       ),
     );
   }

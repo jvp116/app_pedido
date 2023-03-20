@@ -15,6 +15,7 @@ dependencies:
   dio: ^4.0.6
   brasil_fields: ^1.10.0
   provider: ^6.0.5
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   flutter_test:
