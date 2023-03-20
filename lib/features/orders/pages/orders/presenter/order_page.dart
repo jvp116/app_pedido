@@ -39,7 +39,7 @@ class _OrderPageState extends State<OrderPage> {
             actions: [
               IconButton(
                   onPressed: () {
-                    if (controller.state == SuccessOrderState && controller.state.orders.isNotEmpty()) {
+                    if (controller.state.orders.length > 0) {
                       Navigate().toSearchOrderPage(context, controller);
                     }
                   },
