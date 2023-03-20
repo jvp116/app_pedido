@@ -39,7 +39,9 @@ class _OrderPageState extends State<OrderPage> {
             actions: [
               IconButton(
                   onPressed: () {
-                    Navigate().toSearchOrderPage(context, controller);
+                    if (controller.state == SuccessOrderState && controller.state.orders.isNotEmpty()) {
+                      Navigate().toSearchOrderPage(context, controller);
+                    }
                   },
                   icon: const Icon(Icons.search_rounded),
                   color: Colors.deepPurpleAccent,

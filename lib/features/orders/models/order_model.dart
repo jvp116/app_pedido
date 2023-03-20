@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:app_pedido/features/customers/models/customer_model.dart';
 import 'package:app_pedido/features/customers/models/new_customer_model.dart';
 import 'package:app_pedido/features/orders/models/item_model.dart';

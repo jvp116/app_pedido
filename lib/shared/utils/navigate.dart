@@ -1,6 +1,7 @@
 import 'package:app_pedido/features/customers/pages/customers/controller/customer_controller.dart';
 import 'package:app_pedido/features/customers/pages/customers/presenter/customer_page.dart';
 import 'package:app_pedido/features/customers/pages/newCustomers/presenter/new_customer_page.dart';
+import 'package:app_pedido/features/orders/pages/newOrders/presenter/new_order_page.dart';
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
 import 'package:app_pedido/features/orders/pages/searchOrders/presentation/search_order_page.dart';
 import 'package:app_pedido/features/products/pages/newProducts/presenter/new_product_page.dart';
@@ -46,12 +47,12 @@ class Navigate {
   }
 
   void toNewOrderPage(BuildContext context, OrderController controller) {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => NewOrderPage(controller: controller),
-    //   ),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const NewOrderPage(),
+      ),
+    );
   }
 
   void toSearchOrderPage(BuildContext context, OrderController controller) {
