@@ -17,9 +17,8 @@ class ItemModel {
 
   static Map<String, dynamic> toMap(ItemModel item) {
     return {
-      'id': item.id,
       'quantidade': item.quantity,
-      'produto': item.product,
+      'produto': NewProductModel.toMap(item.product),
     };
   }
 }

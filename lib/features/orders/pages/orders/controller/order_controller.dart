@@ -10,11 +10,6 @@ class OrderController extends ChangeNotifier {
   var state;
 
   final formKey = GlobalKey<FormState>();
-  // final TextEditingController nameController = TextEditingController();
-  // final TextEditingController lastnameController = TextEditingController();
-
-  // late bool isNameEdited = false;
-  // late bool isLastnameEdited = false;
 
   late bool isCreated = false;
   late bool isDeleted = false;
@@ -49,11 +44,6 @@ class OrderController extends ChangeNotifier {
 
     return null;
   }
-
-  // clearForm() {
-  //   nameController.clear();
-  //   lastnameController.clear();
-  // }
 
   int recoverIndex(int id) {
     for (var obj in state.orders) {

@@ -6,8 +6,8 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 class NewOrderController extends ChangeNotifier {
-  final OrderController orderController;
-  NewOrderController(this.orderController);
+  final OrderController controller;
+  NewOrderController(this.controller);
 
   OrderModel newOrder = OrderModel(id: 0, date: "", customer: CustomerModel(id: 0, cpf: "", name: "", lastname: ""), items: []);
 
@@ -18,8 +18,7 @@ class NewOrderController extends ChangeNotifier {
   bool isFindCustomer = false;
 
   Future<void> createOrder() async {
-    // String cpf = UtilBrasilFields.removeCaracteres(cpfController.text);
-    // await controller.createCustomer(cpf, nameController.text, lastnameController.text);
+    await controller.createOrder("", newOrder.customer, newOrder.items);
   }
 
   findCustomer(List<CustomerModel> customers) {

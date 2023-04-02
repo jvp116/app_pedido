@@ -1,4 +1,5 @@
 import 'package:app_pedido/features/customers/models/customer_model.dart';
+import 'package:app_pedido/features/customers/models/new_customer_model.dart';
 import 'package:app_pedido/features/orders/models/item_model.dart';
 import 'package:app_pedido/features/orders/models/order_model.dart';
 import 'package:app_pedido/shared/constants.dart';
@@ -18,8 +19,8 @@ class OrderService {
   Future<OrderModel> createOrder(String date, CustomerModel customer, List<ItemModel> items) async {
     Map<String, dynamic> data = {
       'data': date,
-      'cliente': customer,
-      'itens': items
+      'cliente': NewCustomerModel.toMap(customer),
+      'itens': items.map((item) => ItemModel.toMap(item)).toList()
     };
 
     final response = await dio.post('$basePath/pedidos', data: data);
