@@ -1,4 +1,5 @@
 import 'package:app_pedido/features/customers/models/customer_model.dart';
+import 'package:app_pedido/features/orders/models/item_model.dart';
 import 'package:app_pedido/features/orders/models/order_model.dart';
 import 'package:app_pedido/features/orders/pages/orders/controller/order_controller.dart';
 import 'package:brasil_fields/brasil_fields.dart';
@@ -40,5 +41,20 @@ class NewOrderController extends ChangeNotifier {
       );
     }
     return const SnackBar(content: Text("Não existe um cliente com esse CPF!"), backgroundColor: Color.fromARGB(161, 235, 223, 0));
+  }
+
+  isSelectedProduct(ItemModel itemSelected) {
+    bool isSelected = false;
+
+    for (var item in newOrder.items) {
+      if (item.product == itemSelected.product) {
+        isSelected = true;
+      }
+    }
+
+    if (!isSelected) {
+      newOrder.items.add(itemSelected);
+      isSelected = false;
+    }
   }
 }

@@ -12,7 +12,7 @@ class ItemModel {
   });
 
   static ItemModel fromMap(Map<String, dynamic> map) {
-    return ItemModel(id: map['id'] ?? 0, quantity: map['quantidade'] ?? '', product: NewProductModel.fromMap(map['produto'] ?? ''));
+    return ItemModel(id: map['id'] ?? 0, quantity: map['quantidade'] ?? 0, product: NewProductModel.fromMap(map['produto'] ?? ''));
   }
 
   static Map<String, dynamic> toMap(ItemModel item) {
