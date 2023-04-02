@@ -35,15 +35,17 @@ class _ProductPageState extends State<ProductPage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Produtos"),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigate().toNewProductPage(context, controller);
+                  },
+                  icon: const Icon(Icons.add_circle_outline_rounded),
+                  color: Colors.deepPurpleAccent,
+                  iconSize: 32)
+            ],
           ),
           body: configPage(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigate().toNewProductPage(context, controller);
-            },
-            tooltip: 'Novo produto',
-            child: const Icon(Icons.add_rounded),
-          ),
         );
       },
     );

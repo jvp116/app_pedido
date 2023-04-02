@@ -35,15 +35,17 @@ class _CustomerPageState extends State<CustomerPage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Clientes"),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigate().toNewCustomerPage(context, controller);
+                  },
+                  icon: const Icon(Icons.add_circle_outline_rounded),
+                  color: Colors.deepPurpleAccent,
+                  iconSize: 32)
+            ],
           ),
           body: configPage(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigate().toNewCustomerPage(context, controller);
-            },
-            tooltip: 'Novo cliente',
-            child: const Icon(Icons.add_rounded),
-          ),
         );
       },
     );

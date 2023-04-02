@@ -45,18 +45,18 @@ class _OrderPageState extends State<OrderPage> {
                   },
                   icon: const Icon(Icons.search_rounded),
                   color: Colors.deepPurpleAccent,
+                  iconSize: 32),
+              IconButton(
+                  onPressed: () {
+                    Navigate().toNewOrderPage(context, controller);
+                  },
+                  icon: const Icon(Icons.add_circle_outline_rounded),
+                  color: Colors.deepPurpleAccent,
                   iconSize: 32)
             ],
           ),
           drawer: const DrawerWidget(),
           body: configPage(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigate().toNewOrderPage(context, controller);
-            },
-            tooltip: 'Novo pedido',
-            child: const Icon(Icons.add_rounded),
-          ),
         );
       },
     );
