@@ -46,11 +46,11 @@ class Navigate {
     );
   }
 
-  void toNewOrderPage(BuildContext context, OrderController controller) {
+  void toNewOrderPage(BuildContext context, OrderController orderController) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => NewOrderPage(controller: controller),
+        builder: (context) => NewOrderPage(orderController: orderController),
       ),
     );
   }

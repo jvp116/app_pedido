@@ -2,6 +2,7 @@ import 'package:app_pedido/features/customers/models/customer_model.dart';
 import 'package:app_pedido/features/orders/models/item_model.dart';
 import 'package:app_pedido/features/orders/models/order_model.dart';
 import 'package:app_pedido/features/orders/stores/order_store.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 class OrderController extends ChangeNotifier {
@@ -39,6 +40,14 @@ class OrderController extends ChangeNotifier {
       state.orders.remove(order);
     }
     notifyListeners();
+  }
+
+  String? validateCPF(String? value) {
+    if (value == null || value.isEmpty) return 'Por favor, informe o CPF';
+
+    if (!UtilBrasilFields.isCPFValido(value)) return 'CPF inválido';
+
+    return null;
   }
 
   // clearForm() {
