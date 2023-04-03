@@ -26,10 +26,10 @@ class _ListProductState extends State<ListProduct> {
             title: Text(product.description),
             onTap: () {
               showModalBottomSheet(
+                constraints: BoxConstraints.tight(Size(MediaQuery.of(context).size.width, 130)),
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 140,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(

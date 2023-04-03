@@ -28,10 +28,10 @@ class _ListCustomerPageState extends State<ListCustomerPage> {
             subtitle: Text(customer.lastname),
             onTap: () {
               showModalBottomSheet(
+                constraints: BoxConstraints.tight(Size(MediaQuery.of(context).size.width, 160)),
                 context: context,
                 builder: (BuildContext context) {
                   return SizedBox(
-                    height: 160,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
