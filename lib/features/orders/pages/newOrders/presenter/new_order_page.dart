@@ -51,10 +51,39 @@ class _NewOrderPageState extends State<NewOrderPage> {
           TextButton(
             onPressed: () {
               if (controllerPage.formKey.currentState!.validate()) {
-                // controllerPage.createCustomer().then((value) {
-                //   ScaffoldMessenger.of(context).showSnackBar(widget.controller.isSuccess());
-                // });
-                Navigator.pop(context);
+                if (controllerPage.newOrder.customer.cpf.isNotEmpty && controllerPage.newOrder.items.isNotEmpty) {
+                  controllerPage.createOrder().then((value) {
+                    ScaffoldMessenger.of(context).showSnackBar(widget.orderController.isSuccess());
+                  });
+                  Navigator.pop(context);
+                } else {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const AlertDialog(
+                            content: SizedBox(
+                              height: 300.0, // Change as per your requirement
+                              width: 300.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.warning_amber_rounded, color: Colors.deepPurpleAccent, size: 64),
+                                  SizedBox(height: 24),
+                                  Text(
+                                    'Ops!',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 24),
+                                  ),
+                                  SizedBox(height: 16),
+                                  Text(
+                                    'Você deve informar o cliente e pelo menos 1 item para cadastrar um novo pedido',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ));
+                }
               }
             },
             child: const Center(child: Text('Cadastrar')),
@@ -70,7 +99,11 @@ class _NewOrderPageState extends State<NewOrderPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Cliente: $nameCustomer", style: const TextStyle(fontSize: 18), textAlign: TextAlign.center),
+                Text("Cliente: $nameCustomer",
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.center),
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: controllerPage.cpfController,
@@ -117,7 +150,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                                             title: Text(product.description),
                                             onTap: () {
                                               setState(() {
-                                                controllerPage.isSelectedProduct(ItemModel(id: 0, quantity: 0, product: product));
+                                                controllerPage.isSelectedProduct(ItemModel(id: 0, quantity: 1, product: product));
                                               });
                                             },
                                           );
@@ -154,7 +187,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    if (item.quantity > 0) {
+                                    if (item.quantity > 1) {
                                       setState(() {
                                         item.quantity--;
                                       });

@@ -37,9 +37,14 @@ class NewOrderController extends ChangeNotifier {
       return const SnackBar(
         content: Text("Cliente adicionado com sucesso!"),
         backgroundColor: Color.fromARGB(167, 76, 175, 80),
+        duration: Duration(seconds: 1),
       );
     }
-    return const SnackBar(content: Text("Não existe um cliente com esse CPF!"), backgroundColor: Color.fromARGB(161, 235, 223, 0));
+    return const SnackBar(
+      content: Text("Não existe um cliente com esse CPF!"),
+      backgroundColor: Color.fromARGB(161, 235, 223, 0),
+      duration: Duration(seconds: 1),
+    );
   }
 
   isSelectedProduct(ItemModel itemSelected) {
