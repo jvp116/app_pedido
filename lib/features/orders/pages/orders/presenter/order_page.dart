@@ -79,6 +79,6 @@ class _OrderPageState extends State<OrderPage> {
       return ListOrderPage(controller: controller);
     }
 
-    return const StartDefaultWidget(iconData: Icons.shopping_bag_outlined, title: 'Seja bem-vindo a área de pedidos!', subtitle: 'comece cadastrando seu primeiro pedido...');
+    return const StartDefaultWidget(iconData: Icons.shopping_bag_outlined, title: 'Seja bem-vindo a área de pedidos!', subtitle: '');
   }
 }
